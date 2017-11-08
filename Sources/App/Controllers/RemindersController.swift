@@ -2,6 +2,13 @@ import Vapor
 import FluentProvider
 
 struct RemindersController {
+
+    let drop: Droplet
+
+    init(drop: Droplet) {
+        self.drop = drop
+    }
+
     func addRoutes(to drop: Droplet) {
         let reminderGroup = drop.grouped("api", "reminders")
         reminderGroup.get (handler: allReminders)
@@ -10,24 +17,6 @@ struct RemindersController {
         reminderGroup.get(Reminder.parameter, "user", handler: getReminderUser)
         reminderGroup.get(Reminder.parameter, "categories", handler: getRemindersCategories)
     }
-
- //    func createReminder(_ req: Request) throws -> ResponseRepresentable {
- //    guard let json = req.json else {
- //        throw Abort.badRequest
- //    }
- //    let reminder = try Reminder(json: json)
- //    try reminder.save()
-
- //    if let categories = json["categories"]?.array {
- //        for categoryJSON in categories {
- //            if let category = try Category.find(categoryJSON["id"]) {
- //                try reminder.categories.add(category)
- //            }
- //        }
- //    }
-
- //    return reminder
-	// }
 
     func createReminder(_ req: Request) throws -> ResponseRepresentable {
     guard let json = req.json else {
@@ -48,10 +37,16 @@ struct RemindersController {
     return reminder
     }
 
-	func allReminders(_ req: Request) throws -> ResponseRepresentable {
-		let reminders = try Reminder.all()
-		return try reminders.makeJSON()
-	}
+	// func allReminders(_ req: Request) throws -> ResponseRepresentable {
+	// 	let reminders = try Reminder.all()
+ //        return try drop.view.make("view", ["reminderlist": allReminders.makeNode(in: nil)])
+	// 	// return try reminders.makeJSON()
+	// }
+    
+    func allReminders(_ req: Request) throws -> ResponseRepresentable {
+      let reminders = try Reminder.all()
+      return try drop.view.make("view", ["reminderlist": reminders.makeNode(in: nil)])
+    }
 
 
 	func getReminder(_ req: Request) throws -> ResponseRepresentable {

@@ -3,7 +3,7 @@ import Vapor
 extension Droplet {
     func setupRoutes() throws {
         
-        let remindersController = RemindersController()
+        let remindersController = RemindersController(drop: self)
         remindersController.addRoutes(to: self)
         let usersControler = UsersController()
         usersControler.addRoutes(to: self)

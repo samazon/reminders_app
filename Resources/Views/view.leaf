@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CRUD</title>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container">
+	<div class="">
+		<h2>Reading</h2>
+		#loop(reminderlist, "reminder"){
+			<div class="table-responsive">
+				<table class="table"> 
+					<thead>
+						<tr>
+							<!-- <th scope="col">#</th> -->
+							<th scope="col">Title</th>
+							<th scope="col">Description</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>#(reminder.title)</td>
+							<td>#(reminder.description)</td>
+						</tr>
+					</tbody>					
+				</table>				
+			</div>
+		}
+	</div>
+</body>
+</html>
