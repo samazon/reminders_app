@@ -40,12 +40,13 @@ struct RemindersController {
 	// func allReminders(_ req: Request) throws -> ResponseRepresentable {
 	// 	let reminders = try Reminder.all()
  //        return try drop.view.make("view", ["reminderlist": allReminders.makeNode(in: nil)])
-	// 	// return try reminders.makeJSON()
-	// }
+    //  // return try reminders.makeJSON()
+    // }
     
     func allReminders(_ req: Request) throws -> ResponseRepresentable {
       let reminders = try Reminder.all()
-      return try drop.view.make("view", ["reminderlist": reminders.makeNode(in: nil)])
+      // return try drop.view.make("view", ["reminderlist": reminders.makeNode(in: nil)])
+		return try reminders.makeJSON()
     }
 
 
